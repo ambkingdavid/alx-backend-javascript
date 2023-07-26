@@ -7,8 +7,8 @@ export default function handleProfileSignup() {
       console.log(`${photoResult.body} ${userResult.firstName} ${userResult.lastName}`);
     })
     /* eslint-disable no-unused-vars */
-    .catch((error) => {
-      console.error('Signup system offline');
+    .catch(() => {
+      console.log('Signup system offline');
     });
   /* eslint-enable no-unused-vars */
 }
