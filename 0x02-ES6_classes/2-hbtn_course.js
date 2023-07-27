@@ -1,8 +1,8 @@
 export default class HolbertonCourse {
   constructor(name, length, students) {
-    this._name = name;
-    this._length = length;
-    this.students = students; // Use the setter to perform validation
+    this._name = HolbertonCourse.validateString(name, 'Name');
+    this._length = HolbertonCourse.validateNumber(length, 'Length');
+    this._students = HolbertonCourse.validateStudentsArray(students);
   }
 
   // Getter and Setter for 'name'
@@ -33,12 +33,32 @@ export default class HolbertonCourse {
 
   // Getter and Setter for 'students'
   get students() {
-    return this._studentsArray;
+    return this._students;
   }
 
   set students(newStudents) {
-    HolbertonCourse.validateStudentsArray(newStudents); // Call the static method to validate
-    this._studentsArray = newStudents;
+    try {
+      // Call the static method directly
+      this._students = HolbertonCourse.validateStudentsArray(newStudents);
+    } catch (error) {
+      // Handle the error gracefully (optional)
+      console.error(error.message);
+      // You can choose to log the error and take appropriate action.
+    }
+  }
+
+  static validateString(value, attribute) {
+    if (typeof value !== 'string') {
+      throw new TypeError(`${attribute} must be a string.`);
+    }
+    return value;
+  }
+
+  static validateNumber(value, attribute) {
+    if (typeof value !== 'number') {
+      throw new TypeError(`${attribute} must be a number.`);
+    }
+    return value;
   }
 
   // Static class method for validating the 'students' array
@@ -52,5 +72,6 @@ export default class HolbertonCourse {
         throw new TypeError('Each student must be a string.');
       }
     }
+    return students;
   }
 }
