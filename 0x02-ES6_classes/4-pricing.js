@@ -2,8 +2,8 @@ import Currency from './3-currency';
 
 export default class Pricing {
   constructor(amount, currency) {
-    this._amount = amount;
-    this._currency = currency
+    this._amount = Pricing.validateNumber(amount, 'Amount');
+    this._currency = currency || Currency('USD', 'Dollars');
   }
 
   get amount() {
@@ -38,5 +38,9 @@ export default class Pricing {
 
   displayFullPrice() {
     return `${this._amount} ${this._currency.name} (${this._currency.code})`;
+  }
+
+  static convertPrice(amount, convertionRate) {
+    return amount * convertionRate;
   }
 }
