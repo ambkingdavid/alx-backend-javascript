@@ -2,7 +2,7 @@
 //   constructor(name, length, students) {
 //     this._name = HolbertonCourse.validateString(name, 'Name');
 //     this._length = HolbertonCourse.validateNumber(length, 'Length');
-//     this._students = HolbertonCourse.validateStudentsArray(students);
+//     this.students = HolbertonCourse.validateStudentsArray(students);
 //   }
 
 //   // Getter and Setter for 'name'
@@ -47,19 +47,19 @@
 //     }
 //   }
 
-//   static validateString(value, attribute) {
-//     if (typeof value !== 'string') {
-//       throw new TypeError(`${attribute} must be a string`);
-//     }
-//     return value;
-//   }
+  // static validateString(value, attribute) {
+  //   if (typeof value !== 'string') {
+  //     throw new TypeError(`${attribute} must be a string`);
+  //   }
+  //   return value;
+  // }
 
-//   static validateNumber(value, attribute) {
-//     if (typeof value !== 'number') {
-//       throw new TypeError(`${attribute} must be a number`);
-//     }
-//     return value;
-//   }
+  // static validateNumber(value, attribute) {
+  //   if (typeof value !== 'number') {
+  //     throw new TypeError(`${attribute} must be a number`);
+  //   }
+  //   return value;
+  // }
 
 //   // Static class method for validating the 'students' array
 //   static validateStudentsArray(students) {
@@ -78,8 +78,8 @@
 
 export default class HolbertonCourse {
   constructor(name, length, students) {
-    this._name = name;
-    this._length = length;
+    this._name = HolbertonCourse.validateString(name, 'Name');
+    this._length = HolbertonCourse.validateNumber(length, 'Length');
     this.students = students; // Use the setter to perform validation
   }
 
@@ -117,6 +117,20 @@ export default class HolbertonCourse {
   set students(newStudents) {
     HolbertonCourse.validateStudentsArray(newStudents);
     this._students = newStudents;
+  }
+
+  static validateString(value, attribute) {
+    if (typeof value !== 'string') {
+      throw new TypeError(`${attribute} must be a string`);
+    }
+    return value;
+  }
+
+  static validateNumber(value, attribute) {
+    if (typeof value !== 'number') {
+      throw new TypeError(`${attribute} must be a number`);
+    }
+    return value;
   }
 
   // Class method for validating the 'students' array
