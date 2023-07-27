@@ -1,23 +1,24 @@
 export default class HolbertonCourse {
   constructor(name, length, students) {
-    self._name = name;
-    self._length = length;
-    self._students = this._validateStudentsArray(students);
+    this._name = name;
+    this._length = length;
+    this.students = students; // Use the setter to perform validation
   }
 
+  // Getter and Setter for 'name'
   get name() {
-    return self._name;
+    return this._name;
   }
 
-  set name(new_name) {
-      if (typeof new_name !== 'string') {
-        throw new TypeError('Name must be a string');
-      } else {
-        self._name = new_name;
-      }
+  set name(newName) {
+    if (typeof newName === 'string') {
+      this._name = newName;
+    } else {
+      throw new TypeError('Name must be a string.');
     }
+  }
 
-    // Getter and Setter for 'length'
+  // Getter and Setter for 'length'
   get length() {
     return this._length;
   }
@@ -32,15 +33,16 @@ export default class HolbertonCourse {
 
   // Getter and Setter for 'students'
   get students() {
-    return this._students;
+    return this._studentsArray;
   }
 
   set students(newStudents) {
-    this._students = this._validateStudentsArray(newStudents);
+    HolbertonCourse.validateStudentsArray(newStudents); // Call the static method to validate
+    this._studentsArray = newStudents;
   }
 
-  // Private helper method to validate 'students' array during object creation and updates
-  _validateStudentsArray(students) {
+  // Static class method for validating the 'students' array
+  static validateStudentsArray(students) {
     if (!Array.isArray(students)) {
       throw new TypeError('Students must be an array.');
     }
@@ -50,7 +52,5 @@ export default class HolbertonCourse {
         throw new TypeError('Each student must be a string.');
       }
     }
-
-    return students;
   }
 }
