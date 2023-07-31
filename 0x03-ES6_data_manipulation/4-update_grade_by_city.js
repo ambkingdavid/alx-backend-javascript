@@ -4,10 +4,10 @@ export default function updateStudentGradeByCity(studentList, city, newGrades) {
   cityStudents = cityStudents.map((student) => {
     for (const grade of newGrades) {
       if (student.id === grade.studentId) {
-        return {...student, grade: grade.grade};
+        return { ...student, grade: grade.grade };
       }
     }
-    return {...student, grade: 'N/A'}
+    return { ...student, grade: 'N/A' };
   });
 
   return cityStudents;
