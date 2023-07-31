@@ -1,17 +1,13 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable camelcase */
-
-import getListStudents from './0-get_list_students';
-
-const getListStudentIds = (getListStudents) => {
-  if (!Array.isArray(getListStudents)) {
+function getListStudentIds(students) {
+  // Check if 'students' is an array
+  if (!Array.isArray(students)) {
     return [];
   }
-  const student_ids = [];
-  getListStudents.forEach((student_id) => {
-    student_ids.push(student_id.id);
-  });
-  return student_ids;
-};
+
+  // Use map() to extract the 'id' property from each object
+  const idArray = students.map((student) => student.id);
+
+  return idArray;
+}
 
 export default getListStudentIds;
