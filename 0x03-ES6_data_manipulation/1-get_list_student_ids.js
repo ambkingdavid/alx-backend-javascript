@@ -1,9 +1,10 @@
 const getListStudentsIds = (students) => {
+  if (!(Array.isArray(students))) {
+    return [];
+  }
   const idArray = [];
   for (const student of students) {
-    if (student.id) {
       idArray.push(student.id);
-    }
   }
   return idArray;
 };
