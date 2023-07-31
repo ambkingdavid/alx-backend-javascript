@@ -1,11 +1,10 @@
-export default function getListStudents() {
+export default function getListStudents(id, firstName, location) {
   /* eslint-disable */
-  const students = [
-    { id: 1, firstName: 'Guillaume', location: 'San Francisco' },
-    { id: 2, firstName: 'James', location: 'Columbia' },
-    { id: 5, firstName: 'Serena', location: 'San Francisco' }
-  ];
-
+  const student1 = { id: 1, firstName: 'Guillaume', location: 'San Francisco' };
+  const student2 = { id: 2, firstName: 'James', location: 'Columbia' };
+  const student3 = { id: 5, firstName: 'Serena', location: 'San Francisco' };
+  const newarr = [];
+  newarr.push(student1, student2, student3);
   /* eslint-enable */
-  return students;
+  return newarr;
 }
