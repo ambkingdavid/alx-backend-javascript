@@ -4,7 +4,7 @@ const getListStudentsIds = (students) => {
   }
   const idArray = [];
   for (const student of students) {
-      idArray.push(student.id);
+    idArray.push(student.id);
   }
   return idArray;
 };
