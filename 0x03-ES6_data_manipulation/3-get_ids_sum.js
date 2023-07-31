@@ -1,6 +1,6 @@
 const getStudentIdsSum = (studentList) => {
-  // Using reduce to calculate the sum of all the student ids.
-  return studentList.reduce((acc, student) => acc + student.id, 0);
+  const newList = studentList.reduce((acc, student) => acc + student.id);
+  return newList;
 };
 
 export default getStudentIdsSum;
