@@ -4,5 +4,5 @@ export default function cleanSet(set, startString) {
     const cleanedValues = filteredValues.map((value) => value.slice(startString.length));
     return cleanedValues.join('-');
   }
-  return '';
+  return ' ';
 }
