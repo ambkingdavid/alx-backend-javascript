@@ -1,9 +1,14 @@
-const welcomeMessage = "Welcome to Holberton School, what is your name?";
-console.log(welcomeMessage);
-process.stdin.on('data', (data) => {
-  username = data.toString().trim();
-  console.log(`Your name is: ${username}`);
+#!/usr/bin/node
+
+// Prints to stdin
+const handleUserInput = (input) => {
+  console.log(`Your name is: ${input}`);
+};
+console.log('Welcome to Holberton School, what is your name?');
+process.stdin.on('data', (input) => {
+  handleUserInput(input);
 });
-process.stdin.on('end', () => {
-  console.log("This important software is now closing");
+process.on('exit', () => {
+  console.log('This important software is now closing');
 });
+module.exports = handleUserInput;
