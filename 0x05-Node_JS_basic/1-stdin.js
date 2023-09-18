@@ -1,6 +1,3 @@
-#!/usr/bin/node
-
-// Prints to stdin
 const handleUserInput = (input) => {
   console.log(`Your name is: ${input}`);
 };
