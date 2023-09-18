@@ -6,8 +6,11 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-function askForName() {
-  rl.question('Welcome to Holberton School, what is your name?\n', (userInput) => {
+console.log("Welcome to Holberton School, what is your name?");
+
+// Start a continuous loop to keep prompting for input
+function promptForName() {
+  rl.question('', (userInput) => {
     if (userInput === undefined) {
       // Ctrl+D was used to exit
       console.log("This important software is now closing");
@@ -15,11 +18,12 @@ function askForName() {
     } else {
       // Process the user's input
       console.log(`Your name is: ${userInput}`);
-      // Ask for the name again by calling the function recursively
-      askForName();
     }
+
+    // Continue the loop by calling the function recursively
+    promptForName();
   });
 }
 
-// Start the interaction by calling the function
-askForName();
+// Start the continuous input loop
+promptForName();
