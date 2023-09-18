@@ -1,3 +1,7 @@
+#!/usr/bin/node
+
+// Read a file synchronously with Node.js
+
 const fs = require("fs");
 
 function countStudents(databasePath) {

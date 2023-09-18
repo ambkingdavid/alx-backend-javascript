@@ -32,6 +32,7 @@ function countStudents(path) {
                     ` List: ${fields[f].list.join(', ')}`);
     }
 
+  /* eslint-disable no-unused-vars */
   } catch (error) {
     throw new Error('Cannot load the database');
   }
