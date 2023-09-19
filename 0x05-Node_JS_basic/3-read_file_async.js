@@ -2,7 +2,7 @@
 
 // Read a file synchronously with Node.js
 
-const fs = require("fs");
+const fs = require('fs');
 
 function countStudents(databasePath) {
   return new Promise((resolve, reject) => {
@@ -27,14 +27,17 @@ function countStudents(databasePath) {
           fields[field].push(student[0]);
         });
 
+        const keys = Object.keys(fields);
         const results = [];
-        for (const field in fields) {
+
+        for (const field of keys) {
           const fieldStudents = fields[field].join(', ');
-          results.push(`Number of students in ${field}: ${fields[field].length}. List: ${fieldStudents}`);
+          results.push(`Number of students in ${field}: ${fields[field].count}.`
+            + ` List: ${fieldStudents}`);
         }
 
         const response = `Number of students: ${totalStudents}\n${results.join('\n')}`;
-        console.log(response)
+        console.log(response);
         resolve(response);
       }
     });
