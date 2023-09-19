@@ -5,10 +5,10 @@ function countStudents(path) {
     const data = fs.readFileSync(path, 'utf8');
 
     const lines = data.split('\n');
-    const fields = {}
+    const fields = {};
     let totalStudents = 0;
 
-    for (let i = 1; i < lines.length; i++) {
+    for (let i = 1; i < lines.length; i += 1) {
       const studentData = lines[i].split(',');
       if (studentData && studentData.length === 4) {
         const field = studentData[studentData.length - 1];
@@ -16,23 +16,26 @@ function countStudents(path) {
         if (!fields[field]) {
           fields[field] = {
             count: 1,
-            list: [firstName]
+            list: [firstName],
           };
-          totalStudents++;
+          totalStudents += 1;
         } else {
-          fields[field].count++;
+          fields[field].count += 1;
           fields[field].list.push(firstName);
-          totalStudents++;
+          totalStudents += 1;
         }
       }
     }
     console.log(`Number of students: ${totalStudents}`);
-    for (f in fields) {
-      console.log(`Number of students in ${f}: ${fields[f].count}.` +
-                    ` List: ${fields[f].list.join(', ')}`);
+
+    const keys = Object.keys(fields);
+
+    for (const f of keys) {
+      console.log(`Number of students in ${f}: ${fields[f].count}.`
+        + ` List: ${fields[f].list.join(', ')}`);
     }
 
-  /* eslint-disable no-unused-vars */
+    /* eslint-disable no-unused-vars */
   } catch (error) {
     throw new Error('Cannot load the database');
   }
