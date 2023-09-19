@@ -8,37 +8,38 @@ function countStudents(databasePath) {
   return new Promise((resolve, reject) => {
     fs.readFile(databasePath, 'utf8', (error, data) => {
       if (error) {
-        reject(error);
+        reject('Cannot load the database');
       } else {
         const lines = data.split('\n');
-        const validStudents = lines.slice(1)
-          .filter((line) => line.trim() !== '')
-          .map((line) => line.split(','));
-        const studentList = validStudents.map((student) => student[0]);
-        const totalStudents = studentList.length;
-
-        // Group students by field
         const fields = {};
-        validStudents.forEach((student) => {
-          const field = student[student.length - 1];
-          if (!fields[field]) {
-            fields[field] = [];
+        let totalStudents = 0;
+
+        for (let i = 1; i < lines.length; i += 1) {
+          const studentData = lines[i].split(',');
+          if (studentData && studentData.length === 4) {
+            const field = studentData[studentData.length - 1];
+            const firstName = studentData[0];
+            if (!fields[field]) {
+              fields[field] = {
+                count: 1,
+                list: [firstName],
+              };
+              totalStudents += 1;
+            } else {
+              fields[field].count += 1;
+              fields[field].list.push(firstName);
+              totalStudents += 1;
+            }
           }
-          fields[field].push(student[0]);
-        });
+        }
+        console.log(`Number of students: ${totalStudents}`);
 
         const keys = Object.keys(fields);
-        const results = [];
 
-        for (const field of keys) {
-          const fieldStudents = fields[field].join(', ');
-          results.push(`Number of students in ${field}: ${fields[field].count}.`
-            + ` List: ${fieldStudents}`);
+        for (const f of keys) {
+          console.log(`Number of students in ${f}: ${fields[f].count}.`
+            + ` List: ${fields[f].list.join(', ')}`);
         }
-
-        const response = `Number of students: ${totalStudents}\n${results.join('\n')}`;
-        console.log(response);
-        resolve(response);
       }
     });
   });
