@@ -6,5 +6,5 @@ process.stdin.on('data', (data) => {
   console.log(`Your name is: ${data.toString().trim()}`);
 });
 process.stdin.on('close', () => {
-  console.log('This important software is now closing');
+  throw new Error('This important software is now closing');
 });
