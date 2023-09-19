@@ -1,6 +1,4 @@
 #!/usr/bin/node
-const express = require('express');
-const app = express();
 
 class AppController {
   static getHomePage(request, response) {

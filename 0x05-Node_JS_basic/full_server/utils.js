@@ -16,7 +16,7 @@ function readDatabase(databasePath) {
       } else {
         const lines = data.split('\n');
         const fields = {};
-        let totalStudents = 0;
+        // let totalStudents = 0;
 
         for (let i = 1; i < lines.length; i += 1) {
           const studentData = lines[i].split(',');
@@ -28,17 +28,17 @@ function readDatabase(databasePath) {
                 count: 1,
                 list: [firstName],
               };
-              totalStudents += 1;
+              // totalStudents += 1;
             } else {
               fields[field].count += 1;
               fields[field].list.push(firstName);
-              totalStudents += 1;
+              // totalStudents += 1;
             }
           }
         }
         // console.log(`Number of students: ${totalStudents}`);
 
-        const keys = Object.keys(fields);
+        // const keys = Object.keys(fields);
 
         // for (const f of keys) {
         //   console.log(`Number of students in ${f}: ${fields[f].count}.`
