@@ -13,7 +13,14 @@ const app = http.createServer((req, res) => {
       countStudents(databasePath)
         .then((data) => {
           res.writeHead(200, { 'Content-Type': 'text/plain' });
-          res.end(`This is the list of our students\n${data}`);
+          let resp = 'This is the list of our students\n';
+          resp = resp.concat(`Number of students: ${data['totalStudents']}\n`)
+          const keys = Object.keys(data['fields']);
+          for (const field of keys) {
+            resp = resp.concat(`Number of students in ${field}: ${data.fields[field].count}. `);
+            resp = resp.concat(`List: ${data.fields[field].list.join(', ')}\n`);
+          }
+          res.end(resp.trim());
         })
         .catch((error) => {
           res.writeHead(500, { 'Content-Type': 'text/plain' });
