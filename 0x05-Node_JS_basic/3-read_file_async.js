@@ -8,7 +8,7 @@ function countStudents(databasePath) {
   return new Promise((resolve, reject) => {
     fs.readFile(databasePath, 'utf8', (error, data) => {
       if (error) {
-        reject(error);
+        reject(new Error(('Cannot load the database')));
       } else {
         const lines = data.split('\n');
         const fields = {};
@@ -40,7 +40,7 @@ function countStudents(databasePath) {
           console.log(`Number of students in ${f}: ${fields[f].count}.`
             + ` List: ${fields[f].list.join(', ')}`);
         }
-        resolve({fields: fields, totalStudents: totalStudents});
+        resolve({ fields, totalStudents });
       }
     });
   });

@@ -9,13 +9,13 @@ const app = http.createServer((req, res) => {
       res.end('Hello Holberton School!');
     } else if (req.url === '/students') {
       // Handle the /students URL path
-      const databasePath = 'database.csv'; // Specify the path to your database file
+      const databasePath = process.argv[2]; // Specify the path to your database file
       countStudents(databasePath)
         .then((data) => {
           res.writeHead(200, { 'Content-Type': 'text/plain' });
           let resp = 'This is the list of our students\n';
-          resp = resp.concat(`Number of students: ${data['totalStudents']}\n`)
-          const keys = Object.keys(data['fields']);
+          resp = resp.concat(`Number of students: ${data.totalStudents}\n`);
+          const keys = Object.keys(data.fields);
           for (const field of keys) {
             resp = resp.concat(`Number of students in ${field}: ${data.fields[field].count}. `);
             resp = resp.concat(`List: ${data.fields[field].list.join(', ')}\n`);
@@ -24,7 +24,7 @@ const app = http.createServer((req, res) => {
         })
         .catch((error) => {
           res.writeHead(500, { 'Content-Type': 'text/plain' });
-          res.end(`Error: ${error.message}\n`);
+          res.end(`${error}`);
         });
     } else {
       // Handle other URL paths
