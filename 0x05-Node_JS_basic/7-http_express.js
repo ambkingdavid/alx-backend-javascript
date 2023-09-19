@@ -10,13 +10,20 @@ app.get('/', (req, res) => {
 
 // Define a route for the students url
 app.get('/students', async (req, res) => {
-  await countStudents('database.csv')
+  const databasePath = process.argv[2];
+  await countStudents(databasePath)
     .then((data) => {
-      const resp = `This is the list of our students\n${data}`;
-      res.send(resp);
+      let resp = 'This is the list of our students\n';
+      resp = resp.concat(`Number of students: ${data.totalStudents}\n`);
+      const keys = Object.keys(data.fields);
+      for (const field of keys) {
+        resp = resp.concat(`Number of students in ${field}: ${data.fields[field].count}. `);
+        resp = resp.concat(`List: ${data.fields[field].list.join(', ')}\n`);
+      }
+      res.send(resp.trim());
     })
     .catch((error) => {
-      res.status(500).send(error);
+      res.send(`${error}`);
     });
 });
 
