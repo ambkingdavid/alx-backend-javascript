@@ -10,14 +10,6 @@ const app = http.createServer((req, res) => {
     } else if (req.url === '/students') {
       // Handle the /students URL path
       const databasePath = process.argv[2]; // Specify the path to your database file
-
-      if (!databasePath) {
-        const error = new Error('Cannot load the database');
-        res.writeHead(500, { 'Content-Type': 'text/plain' });
-        res.end(`${error}`);
-        return; // Stop execution here to prevent further processing
-      }
-
       countStudents(databasePath)
         .then((data) => {
           res.writeHead(200, { 'Content-Type': 'text/plain' });
