@@ -1,6 +1,7 @@
 const express = require('express');
-const app = express();
 const countStudents = require('./3-read_file_async');
+
+const app = express();
 
 // Define a route for the root URL '/'
 app.get('/', (req, res) => {
