@@ -40,6 +40,7 @@ function countStudents(databasePath) {
           console.log(`Number of students in ${f}: ${fields[f].count}.`
             + ` List: ${fields[f].list.join(', ')}`);
         }
+        resolve(fields);
       }
     });
   });
