@@ -24,7 +24,7 @@ const app = http.createServer((req, res) => {
         })
         .catch((error) => {
           res.writeHead(500, { 'Content-Type': 'text/plain' });
-          res.end(`${error}`);
+          res.end(`This is the list of our students\n${error}`);
         });
     }
   }
