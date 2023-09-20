@@ -23,7 +23,7 @@ app.get('/students', async (req, res) => {
       res.send(resp.trim());
     })
     .catch((error) => {
-      res.send(`${error}`);
+      res.send(`This is the list of our students\n${error.message}`);
     });
 });
 
