@@ -8,5 +8,4 @@ function calculateNumber(type, a, b) {
   return null
 }
 
-console.log(calculateNumber('SUB', -1, -3));
 module.exports = calculateNumber;
