@@ -2,8 +2,6 @@
 
 const readDatabase = require('../utils');
 
-const testFilePath = process.argv[2];
-
 function sortFieldsKeys(fields) {
   // returns a list of sorted keys of an object
   const keys = Object.keys(fields).map((field) => field.toLowerCase());
@@ -12,7 +10,7 @@ function sortFieldsKeys(fields) {
 
 class StudentsController {
   static getAllStudents(request, response) {
-    readDatabase(testFilePath)
+    readDatabase(process.argv[2])
       .then((data) => {
         const keys = sortFieldsKeys(data.fields);
         let resp = 'This is the list of our students\n';
@@ -31,7 +29,7 @@ class StudentsController {
   static getAllStudentsByMajor(request, response) {
     const { major } = request.params;
     if (major === 'CS' || major === 'SWE') {
-      readDatabase(testFilePath)
+      readDatabase(process.argv[2])
         .then((data) => {
           const studentsList = data.fields[major].list.join(', ');
           const resp = `List: ${studentsList}`;
