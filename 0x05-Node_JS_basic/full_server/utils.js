@@ -12,7 +12,7 @@ function readDatabase(databasePath) {
     }
     fs.readFile(databasePath, 'utf8', (error, data) => {
       if (error) {
-        reject(error);
+        reject(new Error('Cannot load the database'));
       } else {
         const lines = data.split('\n');
         const fields = {};

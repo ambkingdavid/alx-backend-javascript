@@ -22,7 +22,7 @@ class StudentsController {
         response.status(200).send(resp.trim());
       })
       .catch((error) => {
-        response.status(500).send(`${error}`);
+        response.status(500).send(`${error.message}`);
       });
   }
 
