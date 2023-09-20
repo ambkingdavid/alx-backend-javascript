@@ -14,13 +14,13 @@ class StudentsController {
     readDatabase(databaseFilePath)
       .then((data) => {
         const keys = sortFieldsKeys(data.fields);
-        let resp = 'This is the list of our students';
+        let resp = 'This is the list of our students\n';
         for (const key of keys) {
           const k = key.toUpperCase();
-          resp += `\nNumber of students in ${k}: ${data.fields[k].count}. `;
-          resp += `List: ${data.fields[k].list.join(', ')}`;
+          resp += `Number of students in ${k}: ${data.fields[k].count}. `;
+          resp += `List: ${data.fields[k].list.join(', ')}\n`;
         }
-        response.status(200).send(resp);
+        response.status(200).send(resp.trim());
       })
       .catch((error) => {
         response.status(500).send(`${error}`);
