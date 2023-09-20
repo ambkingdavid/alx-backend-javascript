@@ -5,43 +5,43 @@ describe('calculateNumber', () => {
   // Test cases for ADD type
   describe('ADD', () => {
     it('should return 0 when adding two zeros', () => {
-      assert.strictEqual(calculateNumber('ADD', 0, 0), 0);
+      assert.strictEqual(calculateNumber('SUM', 0, 0), 0);
     });
 
     it('should add positive numbers correctly', () => {
-      assert.strictEqual(calculateNumber('ADD', 5, 10), 15);
+      assert.strictEqual(calculateNumber('SUM', 5, 10), 15);
     });
 
     it('should add negative numbers correctly', () => {
-      assert.strictEqual(calculateNumber('ADD', -5, -10), -15);
+      assert.strictEqual(calculateNumber('SUM', -5, -10), -15);
     });
 
     it('should handle decimal numbers by rounding', () => {
-      assert.strictEqual(calculateNumber('ADD', 2.3, 4.7), 7);
+      assert.strictEqual(calculateNumber('SUM', 2.3, 4.7), 7);
     });
 
     it('should add a large positive number to a small negative number', () => {
-      assert.strictEqual(calculateNumber('ADD', 1000000, -0.000001), 1000000);
+      assert.strictEqual(calculateNumber('SUM', 1000000, -0.000001), 1000000);
     });
 
     it('should add a large negative number to a small positive number', () => {
-      assert.strictEqual(calculateNumber('ADD', -1000000, 0.000001), -1000000);
+      assert.strictEqual(calculateNumber('SUM', -1000000, 0.000001), -1000000);
     });
 
     it('should handle adding numbers with different precisions', () => {
-      assert.strictEqual(calculateNumber('ADD', 0.1, 0.2), 0);
+      assert.strictEqual(calculateNumber('SUM', 0.1, 0.2), 0);
     });
 
     it('should handle adding zero to a large positive number', () => {
-      assert.strictEqual(calculateNumber('ADD', 1000000, 0), 1000000);
+      assert.strictEqual(calculateNumber('SUM', 1000000, 0), 1000000);
     });
 
     it('should handle adding zero to a large negative number', () => {
-      assert.strictEqual(calculateNumber('ADD', -1000000, 0), -1000000);
+      assert.strictEqual(calculateNumber('SUM', -1000000, 0), -1000000);
     });
 
     it('should add numbers where one is very close to zero', () => {
-      assert.strictEqual(calculateNumber('ADD', 0.000001, 0.000002), 0);
+      assert.strictEqual(calculateNumber('SUM', 0.000001, 0.000002), 0);
     });
   });
 
