@@ -2,6 +2,11 @@ const assert = require('assert');
 const calculateNumber = require('./1-calcul'); // Replace with the actual module path
 
 describe('calculateNumber', () => {
+  describe('INVALID TYPE', () => {
+    it('should return NULL when an invalid type is used', () => {
+      assert.strictEqual(calculateNumber('MULTIPLY', 5, 10), null);
+    });
+  });
   // Test cases for ADD type
   describe('ADD', () => {
     it('should return 0 when adding two zeros', () => {
