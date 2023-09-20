@@ -36,7 +36,7 @@ class StudentsController {
           response.status(200).send(resp);
         })
         .catch((error) => {
-          response.status(500).send(`${error}`);
+          response.status(500).send(`${error.message}`);
         });
     } else {
       response.status(500).send('Major parameter must be CS or SWE');

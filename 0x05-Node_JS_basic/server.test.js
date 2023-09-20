@@ -15,7 +15,7 @@ describe('Full HTTP server using Express', () => {
     })
     it('Returns the right error message', (done) => {
       chai.request(app)
-        .get('/students')
+        .get('/students/SWE')
         .end((error, response) => {
           chai.expect(response.text).to.equal(`Cannot load the database`);
           done();
