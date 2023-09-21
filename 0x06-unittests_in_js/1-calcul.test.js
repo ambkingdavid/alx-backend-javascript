@@ -1,135 +1,168 @@
+#!/usr/bin/node
+
+/*
+* You remember the complex calculator??
+* Yeah that one writing some testcases for it
+ */
+
 const assert = require('assert');
-const calculateNumber = require('./1-calcul'); // Replace with the actual module path
+const calculateNumber = require('./1-calcul.js');
 
-describe('calculateNumber', () => {
-  describe('INVALID TYPE', () => {
-    it('should return NULL when an invalid type is used', () => {
-      assert.strictEqual(calculateNumber('MULTIPLY', 5, 10), null);
-    });
-  });
-  // Test cases for ADD type
-  describe('ADD', () => {
-    it('should return 0 when adding two zeros', () => {
-      assert.strictEqual(calculateNumber('SUM', 0, 0), 0);
-    });
-
-    it('should add positive numbers correctly', () => {
-      assert.strictEqual(calculateNumber('SUM', 5, 10), 15);
-    });
-
-    it('should add negative numbers correctly', () => {
-      assert.strictEqual(calculateNumber('SUM', -5, -10), -15);
-    });
-
-    it('should handle decimal numbers by rounding', () => {
-      assert.strictEqual(calculateNumber('SUM', 2.3, 4.7), 7);
-    });
-
-    it('should add a large positive number to a small negative number', () => {
-      assert.strictEqual(calculateNumber('SUM', 1000000, -0.000001), 1000000);
-    });
-
-    it('should add a large negative number to a small positive number', () => {
-      assert.strictEqual(calculateNumber('SUM', -1000000, 0.000001), -1000000);
-    });
-
-    it('should handle adding numbers with different precisions', () => {
-      assert.strictEqual(calculateNumber('SUM', 0.1, 0.2), 0);
-    });
-
-    it('should handle adding zero to a large positive number', () => {
-      assert.strictEqual(calculateNumber('SUM', 1000000, 0), 1000000);
-    });
-
-    it('should handle adding zero to a large negative number', () => {
-      assert.strictEqual(calculateNumber('SUM', -1000000, 0), -1000000);
-    });
-
-    it('should add numbers where one is very close to zero', () => {
-      assert.strictEqual(calculateNumber('SUM', 0.000001, 0.000002), 0);
-    });
-  });
-
-  // Test cases for SUBTRACT type
-  describe('SUBTRACT', () => {
-    it('should return 0 when subtracting zero from zero', () => {
-      assert.strictEqual(calculateNumber('SUBTRACT', 0, 0), 0);
-    });
-
-    it('should subtract positive numbers correctly', () => {
-      assert.strictEqual(calculateNumber('SUBTRACT', 15, 10), 5);
-    });
-
-    it('should subtract negative numbers correctly', () => {
-      assert.strictEqual(calculateNumber('SUBTRACT', -5, -10), 5);
-    });
-
-    it('should handle decimal numbers by rounding', () => {
-      assert.strictEqual(calculateNumber('SUBTRACT', 4.7, 2.3), 3);
-    });
-
-    it('should subtract a large positive number from a small negative number', () => {
-      assert.strictEqual(calculateNumber('SUBTRACT', 0.000001, -1000000), 1000000);
-    });
-
-    it('should subtract a large negative number from a small positive number', () => {
-      assert.strictEqual(calculateNumber('SUBTRACT', 0.000001, 1000000), -1000000);
-    });
-
-    it('should handle subtracting numbers with different precisions', () => {
-      assert.strictEqual(calculateNumber('SUBTRACT', 0.2, 0.1), 0); // Rounded to 1 decimal place
-    });
-
-    it('should handle subtracting a large positive number from zero', () => {
-      assert.strictEqual(calculateNumber('SUBTRACT', 0, 1000000), -1000000);
-    });
-
-    it('should handle subtracting zero from a large negative number', () => {
-      assert.strictEqual(calculateNumber('SUBTRACT', -1000000, 0), -1000000);
-    });
-
-    it('should subtract numbers where one is very close to zero', () => {
-      assert.strictEqual(calculateNumber('SUBTRACT', 0.000002, 0.000001), 0);
-    });
-  });
-
-  // Test cases for DIVIDE type
-  describe('DIVIDE', () => {
-    it('should return NaN when dividing by zero', () => {
-      assert.strictEqual(isNaN(calculateNumber('DIVIDE', 5, 0)), false);
-    });
-
-    it('should divide positive numbers correctly', () => {
-      assert.strictEqual(calculateNumber('DIVIDE', 15, 3), 5);
-    });
-
-    it('should divide negative numbers correctly', () => {
-      assert.strictEqual(calculateNumber('DIVIDE', -10, -2), 5);
-    });
-
-    it('should handle decimal numbers by rounding', () => {
-      assert.strictEqual(calculateNumber('DIVIDE', 7.5, 2), 4);
-    });
-
-    it('should handle dividing a very small positive number by a large positive number', () => {
-      assert.strictEqual(calculateNumber('DIVIDE', 0.000001, 1000000), 0);
-    });
-
-    it('should handle dividing a very small negative number by a large negative number', () => {
-      assert.strictEqual(calculateNumber('DIVIDE', -0.000001, -1000000), 0);
-    });
-
-    it('should handle dividing zero by a large positive number', () => {
-      assert.strictEqual(calculateNumber('DIVIDE', 0, 1000000), 0);
-    });
-
-    it('should handle dividing a large positive number by zero', () => {
-      assert.strictEqual(isNaN(calculateNumber('DIVIDE', 1000000, 0)), false);
-    });
-
-    it('should handle dividing a very small positive number by a very small positive number', () => {
-      assert.strictEqual(calculateNumber('DIVIDE', 0.000001, 0.000002), NaN);
+describe('a more complex calculator sum method', () => {
+  const Sumtests = [
+    {
+      type: 'SUM', a: 2, b: 3, expected: 5,
+    },
+    {
+      type: 'SUM', a: 1.0, b: 2.0, expected: 3,
+    },
+    {
+      type: 'SUM', a: 2.0, b: 2.4, expected: 4,
+    },
+    {
+      type: 'SUM', a: 1.4, b: 3.0, expected: 4,
+    },
+    {
+      type: 'SUM', a: 3, b: 4.5, expected: 8,
+    },
+    {
+      type: 'SUM', a: 3.4999999, b: 3.99997755, expected: 7,
+    },
+    {
+      type: 'SUM', a: 23, b: 2.5, expected: 26,
+    },
+    {
+      type: 'SUM', a: -2, b: 3, expected: 1,
+    },
+    {
+      type: 'SUM', a: -2, b: -3, expected: -5,
+    },
+    {
+      type: 'SUM', a: 23.45, b: -7, expected: 16,
+    },
+    {
+      type: 'SUM', a: 0, b: 78, expected: 78,
+    },
+    {
+      type: 'SUM', a: 2.7, b: -1.4, expected: 2,
+    },
+    {
+      type: 'SUM', a: -3.9999, b: -4.444999, expected: -8,
+    },
+  ];
+  Sumtests.forEach(({
+    type, a, b, expected,
+  }) => {
+    describe('when type is', () => {
+      it(`should return ${expected}`, () => {
+        assert.equal(calculateNumber(type, a, b), expected);
+      });
     });
   });
 });
 
+describe('a more complex calculator subtraction method', () => {
+  const SubtractionTests = [
+    {
+      type: 'SUBTRACT', a: 2, b: 3, expected: -1,
+    },
+    {
+      type: 'SUBTRACT', a: 1.0, b: 2.0, expected: -1,
+    },
+    {
+      type: 'SUBTRACT', a: 2.0, b: 2.4, expected: 0,
+    },
+    {
+      type: 'SUBTRACT', a: 1.4, b: 3.0, expected: -2,
+    },
+    {
+      type: 'SUBTRACT', a: 3, b: 4.5, expected: -2,
+    },
+    {
+      type: 'SUBTRACT', a: 3.4999999, b: 3.99997755, expected: -1,
+    },
+    {
+      type: 'SUBTRACT', a: 23, b: 2.5, expected: 20,
+    },
+    {
+      type: 'SUBTRACT', a: -2, b: 3, expected: -5,
+    },
+    {
+      type: 'SUBTRACT', a: -2, b: -3, expected: 1,
+    },
+    {
+      type: 'SUBTRACT', a: 23.45, b: -7, expected: 30,
+    },
+    {
+      type: 'SUBTRACT', a: 0, b: 78, expected: -78,
+    },
+    {
+      type: 'SUBTRACT', a: 2.7, b: -1.4, expected: 4,
+    },
+    {
+      type: 'SUBTRACT', a: -3.9999, b: -4.444999, expected: 0,
+    },
+  ];
+  SubtractionTests.forEach(({
+    type, a, b, expected,
+  }) => {
+    describe('when type is', () => {
+      it(`should return ${expected}`, () => {
+        assert.equal(calculateNumber(type, a, b), expected);
+      });
+    });
+  });
+});
+
+describe('a more complex calculator Division method', () => {
+  const DivideTest = [
+    {
+      type: 'DIVIDE', a: 6, b: 3, expected: 2,
+    },
+    {
+      type: 'DIVIDE', a: 1.0, b: 2.0, expected: 0.5,
+    },
+    {
+      type: 'DIVIDE', a: 2.0, b: 2.4, expected: 1,
+    },
+    {
+      type: 'DIVIDE', a: 6.4, b: 3.0, expected: 2,
+    },
+    {
+      type: 'DIVIDE', a: 3, b: 0, expected: 'Error',
+    },
+    {
+      type: 'DIVIDE', a: 3.4999999, b: 6, expected: 0.5,
+    },
+    {
+      type: 'DIVIDE', a: 25, b: 7.5, expected: 3.125,
+    },
+    {
+      type: 'DIVIDE', a: -2, b: 0.09999, expected: 'Error',
+    },
+    {
+      type: 'DIVIDE', a: -24, b: 3, expected: -8,
+    },
+    {
+      type: 'DIVIDE', a: 23.55, b: -8, expected: -3,
+    },
+    {
+      type: 'DIVIDE', a: 0, b: 78, expected: 0,
+    },
+    {
+      type: 'DIVIDE', a: 2.7, b: -1.4, expected: -3,
+    },
+    {
+      type: 'DIVIDE', a: -3.9999, b: -4.444999, expected: 1,
+    },
+  ];
+  DivideTest.forEach(({
+    type, a, b, expected,
+  }) => {
+    describe('when type is', () => {
+      it(`should return ${expected}`, () => {
+        assert.equal(calculateNumber(type, a, b), expected);
+      });
+    });
+  });
+});
