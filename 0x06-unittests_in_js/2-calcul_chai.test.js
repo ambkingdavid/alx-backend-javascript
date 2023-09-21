@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const calculateNumber = require('./2-calcul'); // Replace with the actual module path
+const calculateNumber = require('./2-calcul_chai'); // Replace with the actual module path
 
 describe('calculateNumber', () => {
   describe('INVALID TYPE', () => {
