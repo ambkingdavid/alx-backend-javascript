@@ -87,8 +87,8 @@ describe('calculateNumber', () => {
 
   // Test cases for DIVIDE type
   describe('DIVIDE', () => {
-    it('should return NaN when dividing by zero', () => {
-      assert.strictEqual(isNaN(calculateNumber('DIVIDE', 5, 0)), false);
+    it('should return Error when dividing by zero', () => {
+      assert.strictEqual((calculateNumber('DIVIDE', 5, 0)), 'Error');
     });
 
     it('should divide positive numbers correctly', () => {
@@ -116,11 +116,11 @@ describe('calculateNumber', () => {
     });
 
     it('should handle dividing a large positive number by zero', () => {
-      assert.strictEqual(isNaN(calculateNumber('DIVIDE', 1000000, 0)), false);
+      assert.strictEqual((calculateNumber('DIVIDE', 1000000, 0)), 'Error');
     });
 
     it('should handle dividing a very small positive number by a very small positive number', () => {
-      assert.strictEqual(calculateNumber('DIVIDE', 0.000001, 0.000002), NaN);
+      assert.strictEqual(calculateNumber('DIVIDE', 0.000001, 0.000002), 'Error');
     });
   });
 });

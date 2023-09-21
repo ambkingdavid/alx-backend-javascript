@@ -3,9 +3,13 @@ function calculateNumber(type, a, b) {
     return Math.round(a) + Math.round(b);
   if (type === 'SUBTRACT')
     return Math.round(a) - Math.round(b);
-  if (type === 'DIVIDE')
+  if (type === 'DIVIDE') {
+    if (Math.round(b) === 0){
+      return 'Error';
+    }
     return Math.round(a) / Math.round(b);
-  return null
+  }
+  return null;
 }
 
 module.exports = calculateNumber;
