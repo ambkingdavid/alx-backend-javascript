@@ -1,16 +1,33 @@
+// api.js
+
 const express = require('express');
-
 const app = express();
+const port = 7865;
 
-// app.get('/', (request, response) => {
-//   response.status(200).send('Welcome to the payment system');
-// });
-
-app.get('/cart/:id', (request, response) => {
-  const { id } = request.params
-  response.status(200).send(`Payment methods for cart ${id}`);
+app.listen(port, () => {
+  console.log(`API available on localhost port ${port}`);
 });
 
-app.listen('7865', () => {
-  console.log('API available on localhost port 7865');
+// Middleware to validate :id parameter as a number
+app.param('id', (req, res, next, id) => {
+  if (!/^\d+$/.test(id)) {
+    const error = new Error();
+    error.status = 404;
+    next(error);
+  } else {
+    next();
+  }
 });
+
+// Define a route for GET /
+app.get('/', (req, res) => {
+  res.send('Welcome to the payment system');
+});
+
+// Define a route for GET /cart/:id
+app.get('/cart/:id', (req, res) => {
+  const { id } = req.params;
+  res.send(`Payment methods for cart ${id}`);
+});
+
+module.exports = app;
