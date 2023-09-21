@@ -11,9 +11,9 @@ app.listen(port, () => {
 // Middleware to validate :id parameter as a number
 app.param('id', (req, res, next, id) => {
   if (!/^\d+$/.test(id)) {
-    const error = new Error();
+    const error = new Error(`Cannot GET /cart/${id}`);
     error.status = 404;
-    next(error);
+    next(error.message);
   } else {
     next();
   }
