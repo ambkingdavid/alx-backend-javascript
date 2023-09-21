@@ -19,6 +19,14 @@ app.param('id', (req, res, next, id) => {
   }
 });
 
+app.use((err, req, res, next) => {
+  // Check if the error has a status code; if not, default to 500
+  const statusCode = err.status;
+
+  // Send an error response with the appropriate status code and message
+  res.status(statusCode).send(err.message);
+});
+
 // Define a route for GET /
 app.get('/', (req, res) => {
   res.send('Welcome to the payment system');
