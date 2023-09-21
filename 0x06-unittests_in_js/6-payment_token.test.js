@@ -18,7 +18,7 @@ describe('getPaymentTokenFromAPI', () => {
       })
       .catch((error) => {
         // If an error occurs, fail the test
-        done();
+        done(error);
       });
   });
 });
