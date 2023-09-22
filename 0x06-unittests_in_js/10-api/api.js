@@ -9,25 +9,6 @@ app.listen(port, () => {
   console.log(`API available on localhost port ${port}`);
 });
 
-// Middleware to validate :id parameter as a number
-app.param('id', (req, res, next, id) => {
-  if (!/^\d+$/.test(id)) {
-    const error = new Error(`Cannot GET /cart/${id}`);
-    error.status = 404;
-    next(error); // Pass the error to the next middleware
-  } else {
-    next();
-  }
-});
-
-app.use((err, req, res, next) => {
-  // Check if the error has a status code; if not, default to 500
-  const statusCode = err.status || 500;
-
-  // Send an error response with the appropriate status code and message
-  res.status(statusCode).send(err.message || 'Internal Server Error');
-});
-
 // Define a route for GET /
 app.get('/', (req, res) => {
   res.send('Welcome to the payment system');
