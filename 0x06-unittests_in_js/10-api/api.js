@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 });
 
 // Define a route for GET /cart/:id
-app.get('/cart/:id', (req, res) => {
+app.get('/cart/:id([0-9]*)', (req, res) => {
   const { id } = req.params;
   res.send(`Payment methods for cart ${id}`);
 });
