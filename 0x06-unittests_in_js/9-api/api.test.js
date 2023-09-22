@@ -18,7 +18,7 @@ describe('API Tests', () => {
 
   it('should return a 404 status code when :id is NOT a number', (done) => {
     request('http://localhost:7865/cart/abc', (error, response, body) => {
-      expect(response.statusCode).to.equal(500);
+      expect(response.statusCode).to.equal(404);
       done();
     });
   });
