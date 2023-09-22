@@ -10,6 +10,13 @@ describe('API Tests', () => {
     });
   });
 
+  it('should return the correct result for GET /cart/123', (done) => {
+    request.get('http://localhost:7865/cart/123', (error, response, body) => {
+      expect(body).to.equal('Payment methods for cart 123');
+      done();
+    });
+  });
+
   describe('Cart Page Tests', () => {
     it('should return a 200 status code when :id is a number', (done) => {
       request.get('http://localhost:7865/cart/123', (error, response, body) => {
